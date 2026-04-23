@@ -11,64 +11,60 @@ body { background-color: #000; font-family: sans-serif; color: white; overflow-x
 
 /* --- NAVIGATION --- */
 nav {
-    position: fixed; width: 100%; padding: 25px 8%;
+    position: fixed; width: 100%; padding: 20px 5%;
     display: flex; justify-content: space-between; z-index: 1000;
     mix-blend-mode: difference;
 }
-.nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+.nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
-/* --- SECTIONS --- */
-.case-study { min-height: 100vh; padding: 120px 8%; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.container { max-width: 1200px; margin: 0 auto; }
+/* --- CONTAINERS --- */
+.case-study { min-height: 100vh; padding: 100px 5% 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.container { max-width: 1100px; margin: 0 auto; width: 100%; }
 
-/* --- THE BOXES (HARD BORDERS ON EVERYTHING) --- */
+/* --- THE BOXES (Borders on EVERYTHING) --- */
 img, video, .video-wrap, .brand-logo {
-    border: 3px solid var(--accent) !important; /* Thick brand-colored boxes */
-    padding: 10px;
-    background: rgba(0,0,0,0.5);
+    border: 2px solid var(--accent) !important;
+    padding: 8px;
+    background: rgba(255,255,255,0.02);
     display: block;
     width: 100%;
 }
 
-.brand-logo { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; }
+.brand-logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px; }
 
-/* --- GRID FOR BREW & NEON --- */
+/* --- MAIN CONTENT GRID (Cards & Menu / Tickets & Poster) --- */
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Left side for stacks, Right side for posters/menus */
-    gap: 40px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-/* STACKED ELEMENTS (Cards & Tickets) */
-.stack-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.stack-column img { width: 100%; max-width: 350px; }
+.stack-column { display: flex; flex-direction: column; gap: 20px; }
 
-/* INSTA FEEDS (Before Mockups) */
-.insta-feed {
-    grid-column: 1 / -1;
+/* --- EQUAL SIZING FOR POSTS & MOCKUPS --- */
+/* This ensures they fit the page and look 'neat' */
+.insta-feed, .mockup-footer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-scales based on screen size */
     gap: 20px;
-    margin: 40px 0;
+    margin: 30px 0;
+    width: 100%;
 }
 
-/* MOCKUPS (At the very end, smaller) */
-.mockup-footer {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+/* Ensure images inside these grids stay proportional and don't explode */
+.insta-feed img, .mockup-footer img {
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
 }
-.mockup-footer img { width: 250px !important; height: 250px !important; object-fit: cover; }
 
-/* --- NEONWAVE COLORS --- */
-#neon { background-color: #000000 !important; --accent: #ec5a86; --text: #493993; }
-#neon h1 { -webkit-text-stroke: 1px var(--accent); color: var(--text); font-size: 5rem; }
+/* --- NEONWAVE OVERRIDE --- */
+#neon { background-color: #000 !important; --accent: #ec5a86; --text: #493993; }
+#neon h1 { font-size: clamp(2rem, 10vw, 5rem); color: var(--text); -webkit-text-stroke: 1px var(--accent); }
 
 /* --- VIDEO --- */
-.video-wrap.landscape { grid-column: span 2; aspect-ratio: 16/9; margin-bottom: 20px; }
+.video-wrap { aspect-ratio: 16/9; margin-bottom: 20px; }
+.video-wrap.portrait { aspect-ratio: 9/16; max-width: 300px; margin: 0 auto; }
+
+/* --- TEXT --- */
+.tagline { letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 20px; color: var(--accent); }
