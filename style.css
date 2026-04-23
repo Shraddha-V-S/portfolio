@@ -1,215 +1,85 @@
-/* --- 1. RESET & FOUNDATION --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    cursor: none; /* Custom cursor is active */
-}
+/* --- 1. RESET & CURSOR --- */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+html { scroll-behavior: smooth; }
+body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: #000;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: white;
-    overflow-x: hidden;
-    line-height: 1.5;
-}
-
-/* --- 2. THE CURSOR --- */
 .cursor {
-    width: 15px;
-    height: 15px;
-    background: white;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    mix-blend-mode: difference;
-    transition: transform 0.1s ease;
+    width: 15px; height: 15px; background: white; border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 10000;
+    mix-blend-mode: difference; transition: transform 0.1s ease;
 }
 
-/* --- 3. NAVIGATION --- */
+/* --- 2. NAVIGATION --- */
 nav {
-    position: fixed;
-    width: 100%;
-    padding: 30px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
+    position: fixed; width: 100%; padding: 30px 8%;
+    display: flex; justify-content: space-between; z-index: 1000;
     mix-blend-mode: difference;
 }
+.nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
 
-.logo {
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-}
+/* --- 3. SECTION & CONTAINER --- */
+.case-study { min-height: 100vh; padding: 140px 8% 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.container { max-width: 1200px; margin: 0 auto; }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 30px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-}
-
-/* --- 4. CASE STUDY SECTIONS --- */
-.case-study {
-    min-height: 100vh;
-    width: 100%;
-    padding: 120px 8%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-/* --- 5. LOGO & TEXT FIXES --- */
+/* --- 4. THE LOGO (SQUARE LOCK) --- */
 .brand-logo {
-    width: auto;
-    max-width: 220px; /* Limits size so it doesn't overwhelm */
-    height: auto;
-    max-height: 80px;  /* Limits height so it doesn't stretch */
-    object-fit: contain; /* Keeps proportions perfect */
-    margin-bottom: 20px;
+    width: 150px;            /* Fixed Square Width */
+    height: 150px;           /* Fixed Square Height */
+    object-fit: contain;     /* Keeps logo inside without stretching */
+    background: rgba(255,255,255,0.03); /* Subtle box background */
+    border: 1px solid var(--accent);
+    padding: 20px;
+    margin-bottom: 30px;
     display: block;
 }
 
-.brand-intro h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Responsive text size */
-    line-height: 1.1;
-    margin-bottom: 10px;
+/* --- 5. GRID LOGIC (ALL SQUARES) --- */
+.content-grid, .neon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
 }
 
-.tagline {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.8rem;
-    margin-bottom: 40px;
-}
-
-/* --- 6. THE CONTENT GRID (FIXES STRETCHING/CUTTING) --- */
-.content-grid {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap naturally */
-    gap: 30px;
-}
-
-/* Video Containers */
-.video-wrap {
-    background: #111;
-    border-radius: 15px;
+/* Box around every image and video container */
+.video-wrap, .img-box {
+    border: 1px solid var(--accent); /* Colored box around pics */
+    padding: 10px;                   /* Space between pic and border */
+    background: rgba(0,0,0,0.2);
+    aspect-ratio: 1 / 1;             /* FORCES EVERYTHING TO BE A SQUARE */
     overflow: hidden;
-    flex: 1 1 400px; /* Grows but stays at least 400px */
 }
 
-.video-wrap.landscape {
-    aspect-ratio: 16 / 9;
-}
-
-.video-wrap.portrait {
-    flex: 0 1 350px; /* Don't stretch portrait videos too wide */
-    aspect-ratio: 9 / 16;
-}
-
-video {
+img, video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Video fills its box perfectly */
+    object-fit: cover;               /* Fills the square box */
     display: block;
 }
 
-/* Image Handling */
-img {
-    width: 100%;
-    height: auto; /* CRITICAL: Maintains aspect ratio */
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-img:hover {
-    transform: scale(1.02);
-}
-
-/* Multi-Image Rows (Insta, Cups, Biz Cards) */
+/* Layout for Insta Rows */
 .insta-feed, .dual-images, .mockup-row {
-    width: 100%;
+    grid-column: 1 / -1;            /* Spans full width */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-/* Specific Fix for Menu/Poster */
-.menu-showcase {
-    width: 100%;
-    max-width: 800px;
-    margin: 30px 0;
-}
-
-/* --- 7. NEONWAVE SPECIFIC GRID --- */
-.neon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 60px;
-    align-items: start;
-}
-
-.poster {
-    max-width: 100%;
-    box-shadow: 0 0 30px var(--accent);
-}
-
-.ticket-stack {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
-.ticket-stack p {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: -10px;
+/* Special Case: If your landscape video is NOT a square */
+/* You can remove this class if you want the video to be square too */
+.landscape {
+    aspect-ratio: 16 / 9 !important; 
+    grid-column: span 2;
 }
 
-/* --- 8. ABOUT SECTION --- */
-#about {
-    background: #050505;
-}
+/* --- 6. TEXT STYLING --- */
+.brand-intro h1 { font-size: 3.5rem; color: var(--text); text-transform: uppercase; }
+.tagline { margin-bottom: 40px; color: var(--accent); letter-spacing: 5px; font-weight: bold; }
 
-.about-text p {
-    max-width: 600px;
-    font-size: 1.1rem;
-    opacity: 0.8;
-}
+/* --- 7. NEONWAVE FIX --- */
+.poster { border: 1px solid var(--accent); padding: 10px; }
+.ticket-stack { display: flex; flex-direction: column; gap: 20px; }
+.ticket-box { border: 1px solid var(--accent); padding: 10px; }
 
-/* --- 9. RESPONSIVE MOBILE FIXES --- */
-@media (max-width: 768px) {
-    .case-study {
-        padding: 100px 5%;
-    }
-    
-    .content-grid {
-        flex-direction: column;
-    }
-
-    .video-wrap.portrait {
-        flex: 1 1 auto;
-        max-width: 100%;
-    }
-}
+/* --- 8. ABOUT --- */
+#about { background: #050505; }
