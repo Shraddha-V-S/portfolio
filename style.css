@@ -1,70 +1,54 @@
 /* --- RESET --- */
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+body { background-color: #000 !important; font-family: sans-serif; color: white; overflow-x: hidden; }
 
-/* --- THE CURSOR --- */
-.cursor {
-    width: 12px; height: 12px; background: white; border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference;
-}
-
-/* --- THE BOXES (Borders on every single visual) --- */
-/* This forces the border and prevents the image from exploding */
+/* --- THE BOXES (Borders on EVERYTHING) --- */
+/* If this doesn't show boxes, the CSS file isn't linked correctly */
 img, video, .video-wrap {
-    border: 3px solid var(--accent) !important;
-    padding: 10px;
-    background: #000;
-    width: 100%;
-    height: auto;
-    max-height: 70vh; /* Prevents any image from being taller than the screen */
-    object-fit: contain; /* Ensures the whole image is visible inside the box */
-    display: block;
+    border: 4px solid var(--accent) !important; /* Thick Borders */
+    padding: 10px !important;
+    background: #000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 60vh !important; /* Forces it to fit on one screen */
+    object-fit: contain !important;
+    display: block !important;
+    margin: 10px 0 !important;
 }
 
-/* --- LOGO (Hard Lock) --- */
+/* --- LOGO FIX --- */
 .brand-logo {
     width: 100px !important;
     height: 100px !important;
-    margin-bottom: 20px;
+    border: 4px solid var(--accent) !important;
 }
 
-/* --- SECTIONS & CONTAINERS --- */
-.case-study { min-height: 100vh; padding: 80px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.container { max-width: 1000px; margin: 0 auto; }
+/* --- CONTAINERS & GRIDS --- */
+.case-study { min-height: 100vh; padding: 60px 5%; border-bottom: 1px solid rgba(255,255,255,0.2); }
+.container { max-width: 900px !important; margin: 0 auto !important; }
 
-/* --- THE NEAT GRID --- */
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    align-items: start;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
 }
 
-/* Specific Stack for Cards/Tickets */
-.stack-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+.stack-column { display: flex; flex-direction: column; gap: 20px; }
 
-/* Instagram & Mockup Rows (Small & Neat) */
+/* --- THE ROW GRIDS (Posts & Mockups) --- */
 .insta-feed, .mockup-footer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 30px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px !important;
+    width: 100% !important;
 }
 
-/* Ensure these row images are smaller and square */
 .insta-feed img, .mockup-footer img {
-    max-height: 300px;
-    aspect-ratio: 1/1;
-    object-fit: cover;
+    aspect-ratio: 1/1 !important;
+    max-height: 250px !important;
 }
 
-/* --- NEONWAVE OVERRIDE --- */
-#neon { background-color: #000 !important; --accent: #ec5a86; --text: #493993; }
-#neon h1 { font-size: 3.5rem; -webkit-text-stroke: 1px var(--accent); color: var(--text); }
-
-/* --- VIDEO --- */
-.video-wrap { aspect-ratio: 16/9; overflow: hidden; }
+/* --- NEONWAVE COLORS --- */
+#neon { background: #000 !important; --accent: #ec5a86; --text: #493993; }
+#neon h1 { font-size: 3rem !important; -webkit-text-stroke: 1px var(--accent); color: var(--text); }
