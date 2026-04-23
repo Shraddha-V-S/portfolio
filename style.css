@@ -1,70 +1,70 @@
-/* --- RESET & CURSOR --- */
+/* --- RESET --- */
 * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-html { scroll-behavior: smooth; }
 body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
 
+/* --- THE CURSOR --- */
 .cursor {
     width: 12px; height: 12px; background: white; border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 10000;
-    mix-blend-mode: difference;
+    position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference;
 }
 
-/* --- NAVIGATION --- */
-nav {
-    position: fixed; width: 100%; padding: 20px 5%;
-    display: flex; justify-content: space-between; z-index: 1000;
-    mix-blend-mode: difference;
-}
-.nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
-
-/* --- CONTAINERS --- */
-.case-study { min-height: 100vh; padding: 100px 5% 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.container { max-width: 1100px; margin: 0 auto; width: 100%; }
-
-/* --- THE BOXES (Borders on EVERYTHING) --- */
-img, video, .video-wrap, .brand-logo {
-    border: 2px solid var(--accent) !important;
-    padding: 8px;
-    background: rgba(255,255,255,0.02);
-    display: block;
+/* --- THE BOXES (Borders on every single visual) --- */
+/* This forces the border and prevents the image from exploding */
+img, video, .video-wrap {
+    border: 3px solid var(--accent) !important;
+    padding: 10px;
+    background: #000;
     width: 100%;
+    height: auto;
+    max-height: 70vh; /* Prevents any image from being taller than the screen */
+    object-fit: contain; /* Ensures the whole image is visible inside the box */
+    display: block;
 }
 
-.brand-logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px; }
+/* --- LOGO (Hard Lock) --- */
+.brand-logo {
+    width: 100px !important;
+    height: 100px !important;
+    margin-bottom: 20px;
+}
 
-/* --- MAIN CONTENT GRID (Cards & Menu / Tickets & Poster) --- */
+/* --- SECTIONS & CONTAINERS --- */
+.case-study { min-height: 100vh; padding: 80px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.container { max-width: 1000px; margin: 0 auto; }
+
+/* --- THE NEAT GRID --- */
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-bottom: 40px;
+    align-items: start;
 }
 
-.stack-column { display: flex; flex-direction: column; gap: 20px; }
+/* Specific Stack for Cards/Tickets */
+.stack-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-/* --- EQUAL SIZING FOR POSTS & MOCKUPS --- */
-/* This ensures they fit the page and look 'neat' */
+/* Instagram & Mockup Rows (Small & Neat) */
 .insta-feed, .mockup-footer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-scales based on screen size */
-    gap: 20px;
-    margin: 30px 0;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
 }
 
-/* Ensure images inside these grids stay proportional and don't explode */
+/* Ensure these row images are smaller and square */
 .insta-feed img, .mockup-footer img {
-    aspect-ratio: 1 / 1; 
+    max-height: 300px;
+    aspect-ratio: 1/1;
     object-fit: cover;
 }
 
 /* --- NEONWAVE OVERRIDE --- */
 #neon { background-color: #000 !important; --accent: #ec5a86; --text: #493993; }
-#neon h1 { font-size: clamp(2rem, 10vw, 5rem); color: var(--text); -webkit-text-stroke: 1px var(--accent); }
+#neon h1 { font-size: 3.5rem; -webkit-text-stroke: 1px var(--accent); color: var(--text); }
 
 /* --- VIDEO --- */
-.video-wrap { aspect-ratio: 16/9; margin-bottom: 20px; }
-.video-wrap.portrait { aspect-ratio: 9/16; max-width: 300px; margin: 0 auto; }
-
-/* --- TEXT --- */
-.tagline { letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 20px; color: var(--accent); }
+.video-wrap { aspect-ratio: 16/9; overflow: hidden; }
