@@ -1,85 +1,90 @@
-/* --- 1. RESET & CURSOR --- */
+/* --- RESET & CURSOR --- */
 * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 html { scroll-behavior: smooth; }
-body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
+body { background-color: #000; font-family: sans-serif; color: white; }
 
 .cursor {
-    width: 15px; height: 15px; background: white; border-radius: 50%;
+    width: 12px; height: 12px; background: white; border-radius: 50%;
     position: fixed; pointer-events: none; z-index: 10000;
-    mix-blend-mode: difference; transition: transform 0.1s ease;
+    mix-blend-mode: difference;
 }
 
-/* --- 2. NAVIGATION --- */
+/* --- NAVIGATION --- */
 nav {
-    position: fixed; width: 100%; padding: 30px 8%;
+    position: fixed; width: 100%; padding: 25px 8%;
     display: flex; justify-content: space-between; z-index: 1000;
     mix-blend-mode: difference;
 }
-.nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+.nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
-/* --- 3. SECTION & CONTAINER --- */
-.case-study { min-height: 100vh; padding: 140px 8% 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.container { max-width: 1200px; margin: 0 auto; }
+/* --- SECTION LAYOUT --- */
+.case-study { min-height: 100vh; padding: 120px 8% 80px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.container { max-width: 1100px; margin: 0 auto; }
 
-/* --- 4. THE LOGO (SQUARE LOCK) --- */
+/* --- THE LOGO BOX --- */
 .brand-logo {
-    width: 150px;            /* Fixed Square Width */
-    height: 150px;           /* Fixed Square Height */
-    object-fit: contain;     /* Keeps logo inside without stretching */
-    background: rgba(255,255,255,0.03); /* Subtle box background */
-    border: 1px solid var(--accent);
-    padding: 20px;
-    margin-bottom: 30px;
-    display: block;
+    width: 120px; 
+    height: 120px;
+    object-fit: contain;
+    border: 2px solid var(--accent); /* THE BOX */
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    margin-bottom: 20px;
 }
 
-/* --- 5. GRID LOGIC (ALL SQUARES) --- */
-.content-grid, .neon-grid {
+/* --- THE IMAGE/VIDEO BOXES --- */
+/* This rule targets the videos and any images in your grids */
+.video-wrap, .insta-feed img, .dual-images img, .mockup-row img, .ticket-stack img, .poster {
+    border: 2px solid var(--accent) !important; /* THE BOX */
+    padding: 8px;                               /* Space inside the box */
+    background: #000;
+    display: block;
+    width: 100%;
+}
+
+/* --- GRID SYSTEM --- */
+.content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    margin-top: 40px;
 }
 
-/* Box around every image and video container */
-.video-wrap, .img-box {
-    border: 1px solid var(--accent); /* Colored box around pics */
-    padding: 10px;                   /* Space between pic and border */
-    background: rgba(0,0,0,0.2);
-    aspect-ratio: 1 / 1;             /* FORCES EVERYTHING TO BE A SQUARE */
-    overflow: hidden;
+/* Force Insta & Small Assets into neat square rows */
+.insta-feed, .dual-images, .mockup-row {
+    grid-column: 1 / -1; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 per row */
+    gap: 15px;
+    margin-top: 20px;
 }
 
-img, video {
+/* SPECIFIC FIX: Brew Haven Mockup Size */
+/* This prevents the cups/mockups from becoming huge */
+.mockup-row {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 250px)); 
+    justify-content: start;
+}
+
+/* VIDEO SIZING */
+.video-wrap.landscape { grid-column: span 2; aspect-ratio: 16 / 9; }
+.video-wrap.portrait { grid-column: span 1; aspect-ratio: 9 / 16; }
+
+video, img {
     width: 100%;
     height: 100%;
-    object-fit: cover;               /* Fills the square box */
-    display: block;
+    object-fit: cover;
 }
 
-/* Layout for Insta Rows */
-.insta-feed, .dual-images, .mockup-row {
-    grid-column: 1 / -1;            /* Spans full width */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
+/* --- TYPOGRAPHY --- */
+.brand-intro h1 { font-size: 3rem; color: var(--text); margin: 10px 0; }
+.tagline { color: var(--accent); letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; }
 
-/* Special Case: If your landscape video is NOT a square */
-/* You can remove this class if you want the video to be square too */
-.landscape {
-    aspect-ratio: 16 / 9 !important; 
-    grid-column: span 2;
-}
-
-/* --- 6. TEXT STYLING --- */
-.brand-intro h1 { font-size: 3.5rem; color: var(--text); text-transform: uppercase; }
-.tagline { margin-bottom: 40px; color: var(--accent); letter-spacing: 5px; font-weight: bold; }
-
-/* --- 7. NEONWAVE FIX --- */
-.poster { border: 1px solid var(--accent); padding: 10px; }
+/* --- NEONWAVE TICKETS --- */
+.neon-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
 .ticket-stack { display: flex; flex-direction: column; gap: 20px; }
-.ticket-box { border: 1px solid var(--accent); padding: 10px; }
 
-/* --- 8. ABOUT --- */
-#about { background: #050505; }
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    .insta-feed, .dual-images { grid-template-columns: repeat(2, 1fr); }
+    .brand-intro h1 { font-size: 2rem; }
+}
