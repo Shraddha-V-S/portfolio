@@ -7,9 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Smooth timing for all animations */
             --ease: cubic-bezier(0.25, 1, 0.5, 1);
-            --transition-speed: 0.5s;
+            --border-style: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -20,10 +19,9 @@
         }
 
         body {
-            background-color: #1a1a1a; /* Dark neutral base */
+            background-color: #0a0a0a;
             color: #fff;
             padding: 20px;
-            overflow-x: hidden;
         }
 
         .container {
@@ -31,155 +29,148 @@
             margin: 0 auto;
         }
 
-        /* --- Header / About --- */
-        .about-section {
+        /* --- Header --- */
+        .intro-header {
             padding: 100px 20px;
             text-align: center;
-            animation: fadeInDown 1s var(--ease);
+            animation: fadeIn 1s var(--ease);
         }
 
-        /* --- Project Section Base --- */
+        /* --- Project Sections --- */
         .project-section {
-            padding: 60px;
+            padding: 50px;
             border-radius: 30px;
             margin-bottom: 60px;
-            transition: var(--transition-speed) var(--ease);
-            animation: slideIn 1s var(--ease) both;
+            transition: 0.5s var(--ease);
         }
 
-        /* Logo next to Title */
         .project-header {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .header-logo {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
-            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 5px;
         }
 
-        .project-title h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .project-title h2 { font-size: 2.2rem; text-transform: uppercase; }
+        .project-desc { margin-bottom: 35px; opacity: 0.8; max-width: 800px; }
 
-        .project-desc {
-            margin-bottom: 30px;
-            max-width: 600px;
-            opacity: 0.9;
-        }
-
-        /* --- The Layout Grid --- */
+        /* --- The Grid --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            gap: 20px;
         }
 
-        /* --- Media Box Logic --- */
+        /* --- THE BOXES --- */
         .item {
             position: relative;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3);
+            border: var(--border-style); /* Visual Box Border */
             border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+            transition: all 0.4s var(--ease);
         }
 
         .item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        /* "Contain" logic so nothing is cut off */
+        /* Media Handling */
+        .media-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
         img, video {
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: cover; /* Default for posts/mockups */
+            object-fit: cover; /* Default for square posts */
         }
 
-        /* Fix for Menu and Cards - Show the whole thing */
-        .show-full img {
-            object-fit: contain;
-            background: rgba(0,0,0,0.1);
+        /* Fix for non-square items (Menu, Cards, Poster, Story) */
+        .fit-entirely img, 
+        .fit-entirely video {
+            object-fit: contain; /* Prevents cutting off */
+            padding: 15px; /* Aesthetic breathing room inside the box */
         }
 
-        /* Neonwave Poster - No Box/Background */
-        .no-box {
-            background: transparent !important;
-            border-radius: 0;
-            overflow: visible;
-        }
-        .no-box img {
-            object-fit: contain;
-            filter: drop-shadow(0 0 15px rgba(236, 90, 134, 0.3));
-        }
-
-        /* --- Specific Sizing Classes --- */
+        /* --- Sizing Classes --- */
         .span-2 { grid-column: span 2; }
         .tall { grid-row: span 2; min-height: 500px; }
         .square { aspect-ratio: 1/1; }
 
-        /* --- Project Colors --- */
+        /* --- Brand Colors --- */
         .lumora { background-color: #2F3E34; color: #F7F3EF; }
         .brew { background-color: #4B2E2B; color: #E6D3B3; }
-        .neon { background-color: #000000; color: #fff; }
+        .neon { background-color: #000000; color: #fff; border: 1px solid #333; }
 
-        /* --- Labels --- */
         .label {
-            padding: 10px;
-            font-size: 11px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px;
+            font-size: 9px;
+            text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.4);
+            border-top: var(--border-style);
+        }
+
+        /* --- About Section --- */
+        .about-me {
+            padding: 80px 40px;
+            background: #111;
+            border-radius: 30px;
+            margin-top: 80px;
             text-align: center;
+            border: var(--border-style);
         }
 
-        /* --- Animations --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        .about-me h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .about-me p { color: #888; margin-bottom: 30px; }
+        .about-me a { color: #fff; font-weight: 700; text-decoration: none; border-bottom: 1px solid #fff; }
 
-        /* Delay for items */
-        .project-section:nth-child(2) { animation-delay: 0.2s; }
-        .project-section:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 900px) {
+        @media (max-width: 800px) {
             .grid { grid-template-columns: repeat(2, 1fr); }
-            .span-2 { grid-column: span 2; }
+            .span-2, .tall { grid-column: span 2; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <section class="about-section">
-        <h1>PORTFOLIO 2026</h1>
-        <p>A collection of visual identities, motion, and brand systems.</p>
-    </section>
+    <header class="intro-header">
+        <h1>PORTFOLIO '26</h1>
+    </header>
 
     <section class="project-section lumora">
         <div class="project-header">
-            <img src="lumora-logo.png" class="header-logo" alt="Lumora Logo">
+            <img src="lumora-logo.png" class="header-logo">
             <div class="project-title"><h2>Lumora Skin</h2></div>
         </div>
-        <p class="project-desc">Skincare branding built on organic textures and minimalist sage tones.</p>
+        <p class="project-desc">Minimalist skincare identity. Clean sage green palettes and organic brand patterns.</p>
         
         <div class="grid">
-            <div class="item span-2"><video autoplay muted loop><source src="lumora-mockup.mp4"></video><div class="label">Campaign Mockup</div></div>
-            <div class="item tall"><video autoplay muted loop><source src="lumora-story.mp4"></video><div class="label">Insta Story</div></div>
+            <div class="item span-2 fit-entirely"><video autoplay muted loop playsinline><source src="lumora-mockup.mp4"></video><div class="label">Landscape Mockup</div></div>
+            <div class="item tall fit-entirely"><video autoplay muted loop playsinline><source src="lumora-story.mp4"></video><div class="label">Insta Story</div></div>
             <div class="item square"><img src="lumora-post1.png"><div class="label">Post 1</div></div>
             <div class="item square"><img src="lumora-post2.png"><div class="label">Post 2</div></div>
             <div class="item square"><img src="lumora-post3.png"><div class="label">Post 3</div></div>
@@ -189,20 +180,20 @@
 
     <section class="project-section brew">
         <div class="project-header">
-            <img src="brew-logo.png" class="header-logo" alt="Brew Logo">
+            <img src="brew-logo.png" class="header-logo">
             <div class="project-title"><h2>Brew Haven</h2></div>
         </div>
-        <p class="project-desc">Tactile cafe identity focusing on warm coffee browns and elegant typography.</p>
+        <p class="project-desc">Artisanal cafe branding. Warm tones and tactile stationary design.</p>
         
         <div class="grid">
-            <div class="item tall span-2 show-full"><img src="brew-menu.png"><div class="label">Menu Design</div></div>
-            <div class="item show-full"><img src="brew-businesscard-front.png"><div class="label">Card Front</div></div>
-            <div class="item show-full"><img src="brew-businesscard-back.png"><div class="label">Card Back</div></div>
-            <div class="item square"><img src="brew-mockup1.png"><div class="label">Mockup 1</div></div>
-            <div class="item square"><img src="brew-mockup2.png"><div class="label">Mockup 2</div></div>
-            <div class="item square"><img src="brew-post1.png"><div class="label">Post 1</div></div>
-            <div class="item square"><img src="brew-post2.png"><div class="label">Post 2</div></div>
-            <div class="item square"><img src="brew-post3.png"><div class="label">Post 3</div></div>
+            <div class="item tall span-2 fit-entirely"><img src="brew-menu.png"><div class="label">Full Menu</div></div>
+            <div class="item fit-entirely"><img src="brew-businesscard-front.png"><div class="label">Card Front</div></div>
+            <div class="item fit-entirely"><img src="brew-businesscard-back.png"><div class="label">Card Back</div></div>
+            <div class="item square"><img src="brew-mockup1.png"></div>
+            <div class="item square"><img src="brew-mockup2.png"></div>
+            <div class="item square"><img src="brew-post1.png"></div>
+            <div class="item square"><img src="brew-post2.png"></div>
+            <div class="item square"><img src="brew-post3.png"></div>
         </div>
     </section>
 
@@ -210,15 +201,22 @@
         <div class="project-header">
             <div class="project-title"><h2 style="color:#ec5a86;">Neonwave 2026</h2></div>
         </div>
-        <p class="project-desc" style="color:#493993;">High-voltage EDM festival visuals with neon accents.</p>
+        <p class="project-desc" style="color:#493993;">EDM Festival visual identity. Bold neon contrasts and digital ticketing.</p>
         
         <div class="grid">
-            <div class="item tall span-2 no-box"><img src="neon.poster.png"></div>
-            
-            <div class="item span-2 show-full"><img src="neon-ticket-normal.png"><div class="label">General Admission</div></div>
-            <div class="item span-2 show-full"><img src="neon-ticket-vip.png"><div class="label">VIP Ticket</div></div>
+            <div class="item tall span-2 fit-entirely"><img src="neon.poster.png"><div class="label">Main Poster</div></div>
+            <div class="item span-2 fit-entirely"><img src="neon-ticket-normal.png"><div class="label">Standard Ticket</div></div>
+            <div class="item span-2 fit-entirely"><img src="neon-ticket-vip.png"><div class="label">VIP Ticket</div></div>
         </div>
     </section>
+
+    <footer class="about-me">
+        <h2>Your Name</h2>
+        <p>Graphic Designer | Brand Identity | Motion Specialist</p>
+        <div class="contact">
+            Reach out at: <a href="mailto:hello@designer.com">hello@designer.com</a>
+        </div>
+    </footer>
 </div>
 
 </body>
