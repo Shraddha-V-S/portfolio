@@ -4,121 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design Portfolio | 2026</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --bg-color: #fdfdfd;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Smooth Scroll --- */
+        html { scroll-behavior: smooth; }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 80px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* --- Project Grid Systems --- */
+        .project-section {
+            margin-bottom: 100px;
+        }
+
+        .project-header {
+            margin-bottom: 25px;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- Media Box Styling --- */
+        .media-box {
+            background: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .media-box img, .media-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Specific Project Styles --- */
+        
+        /* Lumora Skin */
+        #lumora { background-color: #F7F3EF; padding: 40px; border-radius: 20px; }
+        #lumora .project-title { color: #2F3E34; }
+        
+        /* Brew Haven */
+        #brew { background-color: #E6D3B3; padding: 40px; border-radius: 20px; }
+        #brew .project-title { color: #4B2E2B; }
+
+        /* Neonwave */
+        #neon { background-color: #000; color: #fff; padding: 40px; border-radius: 20px; }
+        #neon .project-title { color: #ec5a86; }
+        #neon p { color: #493993; }
+
+        /* Grid Spans for variety */
+        .landscape { grid-column: span 2; }
+        .portrait { grid-row: span 2; }
+
+        /* --- Animations --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        @media (max-width: 768px) {
+            .landscape { grid-column: span 1; }
+        }
+    </style>
 </head>
 <body>
-    <div class="cursor"></div>
 
-    <nav>
-        <div class="logo">PORTFOLIO</div>
-        <div class="nav-links">
-            <a href="#lumora">Lumora</a>
-            <a href="#brew">Brew Haven</a>
-            <a href="#neon">NeonWave</a>
-            <a href="#about">About</a>
+<div class="container">
+    <header>
+        <h1>CREATIVE PORTFOLIO</h1>
+        <p>Graphic Design & Visual Identity</p>
+    </header>
+
+    <section class="about-section">
+        <h2>About Me</h2>
+        <p>Hi, I'm a visual storyteller focused on creating cohesive brand identities. I blend aesthetic precision with functional design to help brands stand out in a crowded digital landscape. My work spans from organic skincare aesthetics to high-energy event branding.</p>
+    </section>
+
+    <section class="project-section" id="lumora">
+        <div class="project-header">
+            <h2 class="project-title">Lumora Skin</h2>
+            <p>A minimalist skincare brand focusing on natural ingredients and organic textures. The visual language uses soft earth tones to evoke a sense of calm and luxury.</p>
         </div>
-    </nav>
-
-    <section id="lumora" class="case-study" style="background-color: #2F3E34; --accent: #A8B5A2; --text: #F7F3EF;">
-        <div class="container" data-aos="fade-up">
-            <div class="brand-intro">
-                <img src="lumora-logo.png" alt="Lumora Logo" class="brand-logo">
-                <h1 style="color: var(--text);">Lumora Skin</h1>
-                <p class="tagline" style="color: var(--accent);">Skincare Identity • Minimalist</p>
+        <div class="grid-container">
+            <div class="media-box"><img src="lumora-logo.png" alt="Logo"></div>
+            <div class="media-box landscape">
+                <video autoplay muted loop playsinline>
+                    <source src="lumora-mockup.mp4" type="video/mp4">
+                </video>
             </div>
-            
-            <div class="content-grid">
-                <div class="video-wrap landscape">
-                    <video autoplay loop muted playsinline><source src="lumora-mockup.mp4" type="video/mp4"></video>
-                </div>
-                <div class="video-wrap portrait">
-                    <video autoplay loop muted playsinline><source src="lumora-story.mp4" type="video/mp4"></video>
-                </div>
+            <div class="media-box portrait">
+                <video autoplay muted loop playsinline>
+                    <source src="lumora-story.mp4" type="video/mp4">
+                </video>
             </div>
-
-            <div class="insta-feed">
-                <img src="lumora-post1.png" alt="Post 1">
-                <img src="lumora-post2.png" alt="Post 2">
-                <img src="lumora-post3.png" alt="Post 3">
-            </div>
+            <div class="media-box"><img src="lumora-post1.png" alt="Post"></div>
+            <div class="media-box"><img src="lumora-post2.png" alt="Post"></div>
+            <div class="media-box"><img src="lumora-post3.png" alt="Post"></div>
+            <div class="media-box"><img src="lumora-post4.png" alt="Post"></div>
         </div>
     </section>
 
-    <section id="brew" class="case-study" style="background-color: #4B2E2B; --accent: #D9A066; --text: #E6D3B3;">
-        <div class="container" data-aos="fade-up">
-            <div class="brand-intro">
-                <img src="brew-logo.png" alt="Brew Haven Logo" class="brand-logo">
-                <h1 style="color: var(--text);">Brew Haven</h1>
-                <p class="tagline" style="color: var(--accent);">Artisanal Cafe • Visual Identity</p>
-            </div>
-            
-            <div class="content-grid">
-                <div class="stack-column">
-                    <img src="brew-businesscard-front.png" alt="Card Front">
-                    <img src="brew-businesscard-back.png" alt="Card Back">
-                </div>
-                <div class="main-visual">
-                    <img src="brew-menu.png" alt="Menu">
-                </div>
-            </div>
-
-            <div class="insta-feed">
-                <img src="brew-post1.png" alt="Post 1">
-                <img src="brew-post2.png" alt="Post 2">
-                <img src="brew-post3.png" alt="Post 3">
-            </div>
-
-            <div class="mockup-footer">
-                <img src="brew-mockup1.png" alt="Cup 1">
-                <img src="brew-mockup2.png" alt="Cup 2">
-            </div>
+    <section class="project-section" id="brew">
+        <div class="project-header">
+            <h2 class="project-title">Brew Haven</h2>
+            <p>A cozy, artisanal cafe identity. Using warm coffee-inspired palettes and tactile mockups to create an inviting atmosphere for caffeine enthusiasts.</p>
+        </div>
+        <div class="grid-container">
+            <div class="media-box"><img src="brew-logo.png" alt="Logo"></div>
+            <div class="media-box"><img src="brew-businesscard-front.png" alt="Card Front"></div>
+            <div class="media-box"><img src="brew-businesscard-back.png" alt="Card Back"></div>
+            <div class="media-box portrait"><img src="brew-menu.png" alt="Menu"></div>
+            <div class="media-box"><img src="brew-mockup1.png" alt="Mockup"></div>
+            <div class="media-box"><img src="brew-mockup2.png" alt="Mockup"></div>
+            <div class="media-box"><img src="brew-post1.png" alt="Post"></div>
+            <div class="media-box"><img src="brew-post2.png" alt="Post"></div>
+            <div class="media-box"><img src="brew-post3.png" alt="Post"></div>
         </div>
     </section>
 
-    <section id="neon" class="case-study" style="background-color: #000000; --accent: #ec5a86; --text: #493993;">
-        <div class="container" data-aos="fade-up">
-            <div class="brand-intro">
-                <h1 style="color: var(--text); -webkit-text-stroke: 1.5px var(--accent);">NEONWAVE</h1>
-                <p class="tagline" style="color: var(--accent);">EDM FESTIVAL 2026</p>
-            </div>
-            
-            <div class="content-grid">
-                <div class="stack-column">
-                    <img src="neon-ticket-normal.png" alt="Ticket">
-                    <img src="neon-ticket-vip.png" alt="VIP Ticket">
-                </div>
-                <div class="main-visual">
-                    <img src="neon-poster.png" alt="Festival Poster" class="poster">
-                </div>
-            </div>
+    <section class="project-section" id="neon">
+        <div class="project-header">
+            <h2 class="project-title">Neonwave 2026</h2>
+            <p>An electrifying EDM festival brand. High contrast, neon accents, and bold typography designed to capture the energy of the nightlife and digital future.</p>
+        </div>
+        <div class="grid-container">
+            <div class="media-box portrait"><img src="neon.poster.png" alt="Poster"></div>
+            <div class="media-box landscape"><img src="neon-ticket-normal.png" alt="Ticket Normal"></div>
+            <div class="media-box landscape"><img src="neon-ticket-vip.png" alt="Ticket VIP"></div>
         </div>
     </section>
 
-    <section id="about" class="case-study" style="background-color: #0a0a0a; --accent: #ffffff; --text: #888;">
-        <div class="container" data-aos="fade-up">
-            <div class="about-text">
-                <h1 style="color: #fff;">About Me</h1>
-                <p style="color: var(--text); font-size: 1.1rem; line-height: 1.6; max-width: 500px;">
-                    Multidisciplinary designer specializing in brand identity. 
-                    I build digital experiences that balance minimalist aesthetics 
-                    with high-energy visuals.
-                </p>
-                <div class="social-links" style="margin-top: 30px;">
-                    <a href="mailto:svs040204@gmail.com" style="color: #fff; text-decoration: none; border-bottom: 1px solid #fff;">Contact Me</a>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000 });
-        const cursor = document.querySelector('.cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-    </script>
 </body>
 </html>
