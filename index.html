@@ -22,6 +22,7 @@
             background-color: #050505;
             color: #fff;
             padding: 20px;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -30,7 +31,7 @@
         }
 
         header {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
         }
 
@@ -68,7 +69,6 @@
             gap: 20px;
         }
 
-        /* --- Media Boxes --- */
         .item {
             position: relative;
             background: rgba(0, 0, 0, 0.2);
@@ -87,7 +87,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        /* Video/Image handling */
         img, video {
             width: 100%;
             height: 100%;
@@ -95,7 +94,6 @@
             object-fit: cover;
         }
 
-        /* Prevent cutting off for specific items */
         .fit-all img, .fit-all video {
             object-fit: contain;
             padding: 20px;
@@ -107,8 +105,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             color: #fff;
             padding: 15px;
             font-size: 11px;
@@ -124,33 +122,72 @@
             transform: translateY(0);
         }
 
-        /* --- Sizes --- */
+        /* --- Grid Utilities --- */
         .span-2 { grid-column: span 2; }
         .tall { grid-row: span 2; min-height: 550px; }
         .square { aspect-ratio: 1/1; }
 
-        /* --- Project Colors --- */
+        /* --- Brand Colors --- */
         .lumora { background-color: #2F3E34; color: #F7F3EF; }
         .brew { background-color: #4B2E2B; color: #E6D3B3; }
         .neon { background-color: #000; color: #fff; border: 1px solid #222; }
 
-        /* --- About Section --- */
-        .footer-about {
+        /* --- ABOUT ME SECTION --- */
+        .about-me-section {
             margin-top: 100px;
-            padding: 80px 40px;
+            padding: 100px 40px;
             background: #111;
             border-radius: 40px;
             text-align: center;
             border: 1px solid #222;
+            animation: fadeIn 1.5s var(--ease);
         }
 
-        .footer-about h2 { font-size: 3rem; margin-bottom: 10px; }
-        .footer-about p { opacity: 0.6; margin-bottom: 30px; font-size: 1.1rem; }
-        .footer-about a { color: #fff; text-decoration: none; border-bottom: 2px solid #fff; padding-bottom: 4px; }
+        .about-me-section h2 { 
+            font-size: 3.5rem; 
+            margin-bottom: 10px; 
+            letter-spacing: -1px;
+        }
+
+        .about-me-section .title-tag {
+            font-size: 1.2rem;
+            color: #D9A066; /* Using the Brew Haven accent for pop */
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .about-me-section p { 
+            max-width: 700px; 
+            margin: 0 auto 40px auto; 
+            line-height: 1.8; 
+            opacity: 0.8; 
+            font-size: 1.1rem;
+        }
+
+        .contact-box {
+            font-size: 1.5rem;
+        }
+
+        .contact-box a { 
+            color: #fff; 
+            text-decoration: none; 
+            border-bottom: 2px solid rgba(255,255,255,0.3); 
+            transition: 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .contact-box a:hover { 
+            border-color: #fff;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 800px) {
             .grid { grid-template-columns: repeat(2, 1fr); }
             .span-2, .tall { grid-column: span 2; }
+            .about-me-section h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -158,7 +195,7 @@
 
 <div class="container">
     <header>
-        <h1 style="letter-spacing: 10px; font-weight: 300;">PORTFOLIO</h1>
+        <h1 style="letter-spacing: 12px; font-weight: 300;">WORKS '26</h1>
     </header>
 
     <section class="project-section lumora">
@@ -166,21 +203,21 @@
             <img src="lumora-logo.png" class="header-logo">
             <div class="project-title"><h2>Lumora Skin</h2></div>
         </div>
-        <p style="margin-bottom: 30px;">Organic skincare aesthetics using sage tones and minimalist layouts.</p>
+        <p style="margin-bottom: 30px;">Organic skincare aesthetics focusing on minimalist sage tones and fluid motion design.</p>
         
         <div class="grid">
             <div class="item span-2 fit-all">
                 <video autoplay muted loop playsinline><source src="lumora-mockup.mp4" type="video/mp4"></video>
-                <div class="hover-label">Landscape Mockup</div>
+                <div class="hover-label">Landscape Brand Mockup</div>
             </div>
             <div class="item tall fit-all">
                 <video autoplay muted loop playsinline><source src="lumora-story.mp4" type="video/mp4"></video>
-                <div class="hover-label">Instagram Story</div>
+                <div class="hover-label">Social Story Animation</div>
             </div>
-            <div class="item square"><img src="lumora-post1.png"><div class="hover-label">Social Post 01</div></div>
-            <div class="item square"><img src="lumora-post2.png"><div class="hover-label">Social Post 02</div></div>
-            <div class="item square"><img src="lumora-post3.png"><div class="hover-label">Social Post 03</div></div>
-            <div class="item square"><img src="lumora-post4.png"><div class="hover-label">Social Post 04</div></div>
+            <div class="item square"><img src="lumora-post1.png"><div class="hover-label">Post 01</div></div>
+            <div class="item square"><img src="lumora-post2.png"><div class="hover-label">Post 02</div></div>
+            <div class="item square"><img src="lumora-post3.png"><div class="hover-label">Post 03</div></div>
+            <div class="item square"><img src="lumora-post4.png"><div class="hover-label">Post 04</div></div>
         </div>
     </section>
 
@@ -189,17 +226,18 @@
             <img src="brew-logo.png" class="header-logo">
             <div class="project-title"><h2>Brew Haven</h2></div>
         </div>
-        <p style="margin-bottom: 30px;">Warm cafe identity with tactile stationary and coffee-inspired palettes.</p>
+        <p style="margin-bottom: 30px;">Artisanal cafe visual identity. A blend of warm coffee textures and elegant typography.</p>
         
         <div class="grid">
-            <div class="item tall span-2 fit-all"><img src="brew-menu.png"><div class="hover-label">Cafe Menu</div></div>
+            <div class="item tall span-2 fit-all"><img src="brew-menu.png"><div class="hover-label">Full Menu Design</div></div>
             <div class="item fit-all"><img src="brew-businesscard-front.png"><div class="hover-label">Business Card Front</div></div>
             <div class="item fit-all"><img src="brew-businesscard-back.png"><div class="hover-label">Business Card Back</div></div>
             <div class="item square"><img src="brew-mockup1.png"><div class="hover-label">Mockup 01</div></div>
             <div class="item square"><img src="brew-mockup2.png"><div class="hover-label">Mockup 02</div></div>
-            <div class="item square"><img src="brew-post1.png"><div class="hover-label">Insta Post 01</div></div>
-            <div class="item square"><img src="brew-post2.png"><div class="hover-label">Insta Post 02</div></div>
-            <div class="item square"><img src="brew-post3.png"><div class="hover-label">Insta Post 03</div></div>
+            <div class="item square"><img src="brew-post1.png"><div class="hover-label">Ad Post 01</div></div>
+            <div class="item square"><img src="brew-post2.png"><div class="hover-label">Ad Post 02</div></div>
+            <div class="item square"><img src="brew-post3.png"><div class="hover-label">Ad Post 03</div></div>
+            <div class="item square"><img src="brew-post4.png"><div class="hover-label">Ad Post 04</div></div>
         </div>
     </section>
 
@@ -207,22 +245,27 @@
         <div class="project-header">
             <div class="project-title"><h2 style="color:#ec5a86;">Neonwave 2026</h2></div>
         </div>
-        <p style="color:#493993; margin-bottom: 30px;">Digital EDM Festival aesthetics. High-contrast neon visuals.</p>
+        <p style="color:#493993; margin-bottom: 30px;">Digital EDM Festival identity. Sharp neon contrasts and high-energy ticketing assets.</p>
         
         <div class="grid">
-            <div class="item tall span-2 fit-all"><img src="neon.poster.png"><div class="hover-label">Event Poster</div></div>
-            <div class="item span-2 fit-all"><img src="neon-ticket-normal.png"><div class="hover-label">Standard Ticket</div></div>
-            <div class="item span-2 fit-all"><img src="neon-ticket-vip.png"><div class="hover-label">VIP Access Ticket</div></div>
+            <div class="item tall span-2 fit-all"><img src="neon-poster.png"><div class="hover-label">Official Poster</div></div>
+            <div class="item span-2 fit-all"><img src="neon-ticket-normal.png"><div class="hover-label">GA Ticket</div></div>
+            <div class="item span-2 fit-all"><img src="neon-ticket-vip.png"><div class="hover-label">VIP Pass</div></div>
         </div>
     </section>
 
-    <footer class="footer-about">
-        <h2>Shraddha V S</h2>
-        <p>Brand & Digital Identity Designer</p>
-        <div class="contact">
-            Email: <a href="mailto:svs040204@gmail.com.com">your.gmail@example.com</a>
+    <section class="about-me-section">
+        <h2>YOUR NAME</h2>
+        <div class="title-tag">Brand & Digital Identity Designer</div>
+        <p>
+            I create cohesive visual stories that bridge the gap between brand identity and digital marketing. 
+            From minimalist organic aesthetics to high-energy motion graphics, my work is built to be clean, 
+            professional, and high-impact.
+        </p>
+        <div class="contact-box">
+            Let's work together: <a href="svs040204@gmail.com">svs040204@gmail.com</a>
         </div>
-    </footer>
+    </section>
 </div>
 
 </body>
