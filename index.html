@@ -8,7 +8,7 @@
     <style>
         :root {
             --ease: cubic-bezier(0.25, 1, 0.5, 1);
-            --border-style: 1px solid rgba(255, 255, 255, 0.2);
+            --border-color: rgba(255, 255, 255, 0.15);
         }
 
         * {
@@ -19,7 +19,7 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: #050505;
             color: #fff;
             padding: 20px;
         }
@@ -29,39 +29,37 @@
             margin: 0 auto;
         }
 
-        /* --- Header --- */
-        .intro-header {
-            padding: 100px 20px;
+        header {
+            padding: 80px 0;
             text-align: center;
-            animation: fadeIn 1s var(--ease);
         }
 
         /* --- Project Sections --- */
         .project-section {
-            padding: 50px;
-            border-radius: 30px;
+            padding: 60px;
+            border-radius: 40px;
             margin-bottom: 60px;
-            transition: 0.5s var(--ease);
+            transition: transform 0.6s var(--ease);
         }
 
         .project-header {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .header-logo {
             width: 60px;
             height: 60px;
             object-fit: contain;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 5px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 8px;
+            border: var(--border-color);
         }
 
-        .project-title h2 { font-size: 2.2rem; text-transform: uppercase; }
-        .project-desc { margin-bottom: 35px; opacity: 0.8; max-width: 800px; }
+        .project-title h2 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- The Grid --- */
         .grid {
@@ -70,83 +68,85 @@
             gap: 20px;
         }
 
-        /* --- THE BOXES --- */
+        /* --- Media Boxes --- */
         .item {
             position: relative;
-            background: rgba(0, 0, 0, 0.3);
-            border: var(--border-style); /* Visual Box Border */
-            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s var(--ease);
-        }
-
-        .item:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-        /* Media Handling */
-        .media-container {
-            width: 100%;
-            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            transition: all 0.5s var(--ease);
         }
 
+        .item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* Video/Image handling */
         img, video {
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: cover; /* Default for square posts */
+            object-fit: cover;
         }
 
-        /* Fix for non-square items (Menu, Cards, Poster, Story) */
-        .fit-entirely img, 
-        .fit-entirely video {
-            object-fit: contain; /* Prevents cutting off */
-            padding: 15px; /* Aesthetic breathing room inside the box */
+        /* Prevent cutting off for specific items */
+        .fit-all img, .fit-all video {
+            object-fit: contain;
+            padding: 20px;
         }
 
-        /* --- Sizing Classes --- */
-        .span-2 { grid-column: span 2; }
-        .tall { grid-row: span 2; min-height: 500px; }
-        .square { aspect-ratio: 1/1; }
-
-        /* --- Brand Colors --- */
-        .lumora { background-color: #2F3E34; color: #F7F3EF; }
-        .brew { background-color: #4B2E2B; color: #E6D3B3; }
-        .neon { background-color: #000000; color: #fff; border: 1px solid #333; }
-
-        .label {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 8px;
-            font-size: 9px;
+        /* --- HOVER LABELS --- */
+        .hover-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            padding: 15px;
+            font-size: 11px;
+            font-weight: 500;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-top: var(--border-style);
+            letter-spacing: 2px;
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease);
         }
+
+        .item:hover .hover-label {
+            transform: translateY(0);
+        }
+
+        /* --- Sizes --- */
+        .span-2 { grid-column: span 2; }
+        .tall { grid-row: span 2; min-height: 550px; }
+        .square { aspect-ratio: 1/1; }
+
+        /* --- Project Colors --- */
+        .lumora { background-color: #2F3E34; color: #F7F3EF; }
+        .brew { background-color: #4B2E2B; color: #E6D3B3; }
+        .neon { background-color: #000; color: #fff; border: 1px solid #222; }
 
         /* --- About Section --- */
-        .about-me {
+        .footer-about {
+            margin-top: 100px;
             padding: 80px 40px;
             background: #111;
-            border-radius: 30px;
-            margin-top: 80px;
+            border-radius: 40px;
             text-align: center;
-            border: var(--border-style);
+            border: 1px solid #222;
         }
 
-        .about-me h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .about-me p { color: #888; margin-bottom: 30px; }
-        .about-me a { color: #fff; font-weight: 700; text-decoration: none; border-bottom: 1px solid #fff; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .footer-about h2 { font-size: 3rem; margin-bottom: 10px; }
+        .footer-about p { opacity: 0.6; margin-bottom: 30px; font-size: 1.1rem; }
+        .footer-about a { color: #fff; text-decoration: none; border-bottom: 2px solid #fff; padding-bottom: 4px; }
 
         @media (max-width: 800px) {
             .grid { grid-template-columns: repeat(2, 1fr); }
@@ -157,8 +157,8 @@
 <body>
 
 <div class="container">
-    <header class="intro-header">
-        <h1>PORTFOLIO '26</h1>
+    <header>
+        <h1 style="letter-spacing: 10px; font-weight: 300;">PORTFOLIO</h1>
     </header>
 
     <section class="project-section lumora">
@@ -166,15 +166,21 @@
             <img src="lumora-logo.png" class="header-logo">
             <div class="project-title"><h2>Lumora Skin</h2></div>
         </div>
-        <p class="project-desc">Minimalist skincare identity. Clean sage green palettes and organic brand patterns.</p>
+        <p style="margin-bottom: 30px;">Organic skincare aesthetics using sage tones and minimalist layouts.</p>
         
         <div class="grid">
-            <div class="item span-2 fit-entirely"><video autoplay muted loop playsinline><source src="lumora-mockup.mp4"></video><div class="label">Landscape Mockup</div></div>
-            <div class="item tall fit-entirely"><video autoplay muted loop playsinline><source src="lumora-story.mp4"></video><div class="label">Insta Story</div></div>
-            <div class="item square"><img src="lumora-post1.png"><div class="label">Post 1</div></div>
-            <div class="item square"><img src="lumora-post2.png"><div class="label">Post 2</div></div>
-            <div class="item square"><img src="lumora-post3.png"><div class="label">Post 3</div></div>
-            <div class="item square"><img src="lumora-post4.png"><div class="label">Post 4</div></div>
+            <div class="item span-2 fit-all">
+                <video autoplay muted loop playsinline><source src="lumora-mockup.mp4" type="video/mp4"></video>
+                <div class="hover-label">Landscape Mockup</div>
+            </div>
+            <div class="item tall fit-all">
+                <video autoplay muted loop playsinline><source src="lumora-story.mp4" type="video/mp4"></video>
+                <div class="hover-label">Instagram Story</div>
+            </div>
+            <div class="item square"><img src="lumora-post1.png"><div class="hover-label">Social Post 01</div></div>
+            <div class="item square"><img src="lumora-post2.png"><div class="hover-label">Social Post 02</div></div>
+            <div class="item square"><img src="lumora-post3.png"><div class="hover-label">Social Post 03</div></div>
+            <div class="item square"><img src="lumora-post4.png"><div class="hover-label">Social Post 04</div></div>
         </div>
     </section>
 
@@ -183,17 +189,17 @@
             <img src="brew-logo.png" class="header-logo">
             <div class="project-title"><h2>Brew Haven</h2></div>
         </div>
-        <p class="project-desc">Artisanal cafe branding. Warm tones and tactile stationary design.</p>
+        <p style="margin-bottom: 30px;">Warm cafe identity with tactile stationary and coffee-inspired palettes.</p>
         
         <div class="grid">
-            <div class="item tall span-2 fit-entirely"><img src="brew-menu.png"><div class="label">Full Menu</div></div>
-            <div class="item fit-entirely"><img src="brew-businesscard-front.png"><div class="label">Card Front</div></div>
-            <div class="item fit-entirely"><img src="brew-businesscard-back.png"><div class="label">Card Back</div></div>
-            <div class="item square"><img src="brew-mockup1.png"></div>
-            <div class="item square"><img src="brew-mockup2.png"></div>
-            <div class="item square"><img src="brew-post1.png"></div>
-            <div class="item square"><img src="brew-post2.png"></div>
-            <div class="item square"><img src="brew-post3.png"></div>
+            <div class="item tall span-2 fit-all"><img src="brew-menu.png"><div class="hover-label">Cafe Menu</div></div>
+            <div class="item fit-all"><img src="brew-businesscard-front.png"><div class="hover-label">Business Card Front</div></div>
+            <div class="item fit-all"><img src="brew-businesscard-back.png"><div class="hover-label">Business Card Back</div></div>
+            <div class="item square"><img src="brew-mockup1.png"><div class="hover-label">Mockup 01</div></div>
+            <div class="item square"><img src="brew-mockup2.png"><div class="hover-label">Mockup 02</div></div>
+            <div class="item square"><img src="brew-post1.png"><div class="hover-label">Insta Post 01</div></div>
+            <div class="item square"><img src="brew-post2.png"><div class="hover-label">Insta Post 02</div></div>
+            <div class="item square"><img src="brew-post3.png"><div class="hover-label">Insta Post 03</div></div>
         </div>
     </section>
 
@@ -201,20 +207,20 @@
         <div class="project-header">
             <div class="project-title"><h2 style="color:#ec5a86;">Neonwave 2026</h2></div>
         </div>
-        <p class="project-desc" style="color:#493993;">EDM Festival visual identity. Bold neon contrasts and digital ticketing.</p>
+        <p style="color:#493993; margin-bottom: 30px;">Digital EDM Festival aesthetics. High-contrast neon visuals.</p>
         
         <div class="grid">
-            <div class="item tall span-2 fit-entirely"><img src="neon.poster.png"><div class="label">Main Poster</div></div>
-            <div class="item span-2 fit-entirely"><img src="neon-ticket-normal.png"><div class="label">Standard Ticket</div></div>
-            <div class="item span-2 fit-entirely"><img src="neon-ticket-vip.png"><div class="label">VIP Ticket</div></div>
+            <div class="item tall span-2 fit-all"><img src="neon.poster.png"><div class="hover-label">Event Poster</div></div>
+            <div class="item span-2 fit-all"><img src="neon-ticket-normal.png"><div class="hover-label">Standard Ticket</div></div>
+            <div class="item span-2 fit-all"><img src="neon-ticket-vip.png"><div class="hover-label">VIP Access Ticket</div></div>
         </div>
     </section>
 
-    <footer class="about-me">
+    <footer class="footer-about">
         <h2>Shraddha V S</h2>
-        <p>Graphic Designer | Brand Identity | Motion Specialist</p>
+        <p>Brand & Digital Identity Designer</p>
         <div class="contact">
-            Reach out at: <a href="mailto:svs040204@gmail.com">hello@designer.com</a>
+            Email: <a href="mailto:svs040204@gmail.com.com">your.gmail@example.com</a>
         </div>
     </footer>
 </div>
